@@ -1,11 +1,8 @@
 package com.main.legaltrackbackend.models.clientsManagement;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.main.legaltrackbackend.models.legalManagement.Lawyer;
+import jakarta.persistence.*;
 
 @Entity
 @Table
@@ -32,6 +29,11 @@ public class Client {
 
     @Column(unique = true)
     private String dni;
+
+    @ManyToOne
+    @JoinColumn(name = "lawyer_id")
+    @JsonBackReference
+    private Lawyer lawyer;
 
     public String getFirstName() {
         return firstName;

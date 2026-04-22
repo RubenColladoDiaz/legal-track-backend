@@ -1,11 +1,13 @@
 package com.main.legaltrackbackend.models.legalManagement;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.main.legaltrackbackend.models.auth.User;
+import com.main.legaltrackbackend.models.clientsManagement.Client;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table
@@ -23,9 +25,6 @@ public class Lawyer {
     private String lastName;
 
     @Column(unique = true)
-    private String email;
-
-    @Column(unique = true)
     private String phone;
 
     @Column(unique = true)
@@ -34,8 +33,20 @@ public class Lawyer {
     @Column
     private String specialization;
 
+    @OneToOne(mappedBy = "lawyer")
+    @JsonBackReference
+    private User user;
+
+    @OneToMany(mappedBy = "lawyer", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<Client> clients = new ArrayList<>();
+
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -52,14 +63,6 @@ public class Lawyer {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getPhone() {
@@ -86,11 +89,31 @@ public class Lawyer {
         this.specialization = specialization;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<Client> getClients() {
+        return clients;
+    }
+
+    public void setClients(List<Client> clients) {
+        this.clients = clients;
+    }
+
     @Override
     public String toString() {
-        return "Lawyer [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName
-                + ", email=" + email + ", phone=" + phone
-                + ", barAssociationNumber=" + barAssociationNumber
-                + ", specialization=" + specialization + "]";
+        return "Lawyer{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", phone='" + phone + '\'' +
+                ", barAssociationNumber='" + barAssociationNumber + '\'' +
+                ", specialization='" + specialization + '\'' +
+                '}';
     }
 }
