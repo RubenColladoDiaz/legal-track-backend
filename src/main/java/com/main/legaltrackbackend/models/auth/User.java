@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.main.legaltrackbackend.models.legalManagement.Lawyer;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table
 public class User {
@@ -32,6 +35,10 @@ public class User {
     @JoinColumn(name = "lawyer_id")
     @JsonManagedReference
     private Lawyer lawyer;
+
+    @OneToMany(mappedBy = "admin")
+    @JsonManagedReference
+    private List<Lawyer> assignedLawyers = new ArrayList<>();
 
     public int getId() {
         return id;
@@ -87,6 +94,14 @@ public class User {
 
     public void setLawyer(Lawyer lawyer) {
         this.lawyer = lawyer;
+    }
+
+    public List<Lawyer> getAssignedLawyers() {
+        return assignedLawyers;
+    }
+
+    public void setAssignedLawyers(List<Lawyer> assignedLawyers) {
+        this.assignedLawyers = assignedLawyers;
     }
 
     @Override

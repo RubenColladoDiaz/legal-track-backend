@@ -41,6 +41,11 @@ public class Lawyer {
     @JsonManagedReference
     private List<Client> clients = new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn(name = "admin_id")
+    @JsonBackReference
+    private User admin;
+
     public int getId() {
         return id;
     }
@@ -103,6 +108,14 @@ public class Lawyer {
 
     public void setClients(List<Client> clients) {
         this.clients = clients;
+    }
+
+    public User getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(User admin) {
+        this.admin = admin;
     }
 
     @Override
