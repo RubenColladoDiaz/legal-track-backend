@@ -2,15 +2,10 @@ package com.main.legaltrackbackend.models.auth;
 
 import com.main.legaltrackbackend.enums.RoleName;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table
@@ -24,8 +19,8 @@ public class Role {
     @Column(unique = true)
     private RoleName name;
 
-    @OneToOne(mappedBy = "role")
-    private User user;
+    @OneToMany(mappedBy = "role")
+    private List<User> users = new ArrayList<>();
 
     public Role() {
         super();
@@ -39,13 +34,10 @@ public class Role {
         this.name = name;
     }
 
-    public User getUser() {
-        return user;
+    public List<User> getUsers() {
+        return users;
     }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+    public void setUsers(List<User> users) {}
 
     @Override
     public String toString() {

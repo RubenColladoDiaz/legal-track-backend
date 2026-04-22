@@ -18,7 +18,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table
-public class Case {
+public class LegalCase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,6 +1,6 @@
 package com.main.legaltrackbackend.models.documents;
 
-import com.main.legaltrackbackend.models.legalManagement.Case;
+import com.main.legaltrackbackend.models.legalManagement.LegalCase;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -34,7 +34,7 @@ public class Document {
 
     @ManyToOne
     @JoinColumn(name = "case_id")
-    private Case legalCase;
+    private LegalCase legalCase;
 
     public int getId() {
         return id;
@@ -72,11 +72,11 @@ public class Document {
         this.size = size;
     }
 
-    public Case getLegalCase() {
+    public LegalCase getLegalCase() {
         return legalCase;
     }
 
-    public void setLegalCase(Case legalCase) {
+    public void setLegalCase(LegalCase legalCase) {
         this.legalCase = legalCase;
     }
 

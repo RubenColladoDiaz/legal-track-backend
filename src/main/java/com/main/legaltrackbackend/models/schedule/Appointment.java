@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 import com.main.legaltrackbackend.enums.AppointmentStatus;
 import com.main.legaltrackbackend.models.clientsManagement.Client;
-import com.main.legaltrackbackend.models.legalManagement.Case;
+import com.main.legaltrackbackend.models.legalManagement.LegalCase;
 import com.main.legaltrackbackend.models.legalManagement.Lawyer;
 
 import jakarta.persistence.Column;
@@ -53,7 +53,7 @@ public class Appointment {
 
     @ManyToOne
     @JoinColumn(name = "case_id")
-    private Case legalCase;
+    private LegalCase legalCase;
 
     public int getId() {
         return id;
@@ -115,11 +115,11 @@ public class Appointment {
         this.lawyer = lawyer;
     }
 
-    public Case getLegalCase() {
+    public LegalCase getLegalCase() {
         return legalCase;
     }
 
-    public void setLegalCase(Case legalCase) {
+    public void setLegalCase(LegalCase legalCase) {
         this.legalCase = legalCase;
     }
 
